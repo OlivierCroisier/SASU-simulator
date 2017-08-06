@@ -3,7 +3,7 @@
     <h1 class="ui header">Freelance simulator</h1>
 
     <form class="ui form" novalidate
-          [formGroup]="simulatorForm" (change)="simulate(simulatorForm.value)">
+          [formGroup]="simulatorForm">
 
         <h3 class="ui dividing header">Chiffre d'affaire</h3>
         <div class="fields">
@@ -27,9 +27,8 @@
             </div>
         </div>
         <div>
-            Jours travaillés annuellement : {{daysPerMonth * 12}}<br/>
-            Chiffre d'affaires brut : {{totalAnnualRevenue}} €<br/>
-            <!--TVA perçue : {{totalAnnualInVAT}} €-->
+            Jours travaillés annuellement : {{model.daysPerMonth * 12}}<br/>
+            Chiffre d'affaires brut : {{model.totalAnnualRevenue}} €<br/>
         </div>
 
         <h3 class="ui dividing header">Dépenses</h3>
@@ -44,8 +43,7 @@
             </div>
         </div>
         <div>
-            Dépenses brutes : {{totalAnnualFees}} €<br/>
-            <!--TVA dépensée : {{totalAnnualOutVAT}} €-->
+            Dépenses brutes : {{model.totalAnnualFees}} €<br/>
         </div>
 
         <h3 class="ui dividing header">Rémunération</h3>
@@ -60,10 +58,10 @@
             </div>
         </div>
         <div>
-            Salaire brut annuel : {{annualGrossSalary}} €<br/>
-            Cotisations patronales (42%) : {{employerSalaryTax}} €<br/>
-            Cotisations salariales (22%) : {{employeeSalaryTax}} €<br/>
-            Salaire net annuel : {{netSalary}} €
+            Salaire brut annuel : {{model.totalAnnualGrossSalary}} €<br/>
+            Cotisations patronales (42%) : {{model.employerSalaryTax}} €<br/>
+            Cotisations salariales (22%) : {{model.employeeSalaryTax}} €<br/>
+            Salaire net annuel : {{model.annualNetSalary}} €
         </div>
 
         <h3 class="ui dividing header">Bénéfices</h3>
@@ -74,30 +72,30 @@
             </div>
         </div>
         <div>
-            Bénéfice brut : {{grossProfit}} €<br/>
-            Impôt sur les Sociétés (IS) : {{profitTax}} €<br/>
-            Bénéfice net : {{netProfit}} €<br/>
+            Bénéfice brut : {{model.grossProfit}} €<br/>
+            Impôt sur les Sociétés (IS) : {{model.profitTax}} €<br/>
+            Bénéfice net : {{model.netProfit}} €<br/>
             <br/>
-            Réserve légale : {{legalReserve}} € <br/>
-            Investissement : {{investment}} € <br/>
-            Dividendes distribuables : {{grossDividends}} € <br/>
-            Dividendes distribués : {{paidDividends}} € <br/>
-            Prélévements sociaux sur les dividendes (15.5%): {{dividendsTax}} € <br/>
-            Dividendes nets : {{netDividends}} € <br/>
+            Investissement : {{model.investment}} € <br/>
+            Dividendes bruts : {{model.grossDividends}} € <br/>
+            Prélévements sociaux sur les dividendes (15.5%): {{model.dividendsTax}} € <br/>
+            Dividendes nets : {{model.netDividends}} € <br/>
         </div>
 
         <h3 class="ui dividing header">Récapitulatif</h3>
         <div>
-            CA : {{totalAnnualRevenue}} €<br/>
-            Dépenses : {{totalAnnualFees}} €<br/>
-            Revenu freelance (net avant IRPP): {{totalFreelanceShare}} € (~ {{totalFreelanceShare / 12 | number : '1.0-0'}} €/mois)<br/>
-            Revenu société : {{totalCompanyShare}} €<br/>
-            Revenu Etat : {{totalStateShare}} € ({{stateSharePercentage}}% du CA)<br/>
+            CA : {{model.totalAnnualRevenue}} €<br/>
+            Dépenses : {{model.totalAnnualFees}} €<br/>
+            Revenu freelance (net avant IRPP): {{model.totalFreelanceShare}} €<br/>
+            Revenu société : {{model.totalCompanyShare}} €<br/>
+            Revenu Etat : {{model.totalStateShare}} €<br/>
         </div>
 
     </form>
 
-    <div id="sankey_basic"></div>
+    <app-graph-sankey *ngIf="model" [model]="model" class="ui fluid container"></app-graph-sankey>
+
+    <pre>{{model|json}}</pre>
 
 </div>
 
