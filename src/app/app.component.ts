@@ -1,17 +1,17 @@
-import {Component, OnDestroy, OnInit} from "@angular/core";
+import {AfterViewInit, Component, OnDestroy, OnInit} from "@angular/core";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {Model} from "./Model";
-import 'rxjs/add/operator/debounceTime';
+import "rxjs/add/operator/debounceTime";
 import {Subscription} from "rxjs/Subscription";
-import {modelGroupProvider} from "@angular/forms/src/directives/ng_model_group";
 
+declare var $: any;
 
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit, OnDestroy {
+export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
 
     simulatorForm: FormGroup;
     model: Model;
@@ -37,6 +37,10 @@ export class AppComponent implements OnInit, OnDestroy {
     }
     ngOnDestroy() {
         this.subscription.unsubscribe();
+    }
+    ngAfterViewInit(): void {
+        $(".ui.accordion").accordion();
+        // $(".tooltip").popup();
     }
 
     simulate(): void {

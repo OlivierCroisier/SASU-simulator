@@ -19,7 +19,7 @@ export class GraphSankeyComponent implements OnChanges {
 
     ngOnChanges(changes: SimpleChanges): void {
         let rows = [
-            ['CA', 'Dépenses', this.model.totalAnnualSpendings],
+            ['CA total', 'Dépenses', this.model.totalAnnualSpendings],
             ['Dépenses', 'Achats', this.model.totalAnnualFees],
             ['Dépenses', 'Salaire super-brut', this.model.annualSuperGrossSalary],
             ['Salaire super-brut', 'Charges patronales', this.model.employerSalaryTax],
@@ -29,21 +29,21 @@ export class GraphSankeyComponent implements OnChanges {
             ['Charges salariales', 'Etat', this.model.employeeSalaryTax],
             ['Salaire brut', 'Salaire net', this.model.annualNetSalary],
             ['Salaire net', 'Freelance', this.model.annualNetSalary],
-            ['CA', 'Bénéfices bruts', this.model.grossProfit],
+            ['CA total', 'Bénéfices bruts', this.model.grossProfit],
             ['Bénéfices bruts', 'IS', this.model.profitTax],
             ['IS', 'Etat', this.model.profitTax],
             ['Bénéfices bruts', 'Bénéfices nets', this.model.netProfit],
             ['Bénéfices nets', 'Dividendes bruts', this.model.grossDividends]
         ];
         if (this.model.annualRevenueFromRegularMonthlyRevenue) {
-            rows.push(['CA mensuel mission', 'CA', this.model.annualRevenueFromRegularMonthlyRevenue]);
+            rows.push(['CA journalier', 'CA total', this.model.annualRevenueFromRegularMonthlyRevenue]);
         }
         if (this.model.annualRevenueFromOtherMonthlyRevenue) {
-            rows.push(['CA mensuel  autre', 'CA', this.model.annualRevenueFromOtherMonthlyRevenue],
+            rows.push(['CA mensuel  autre', 'CA total', this.model.annualRevenueFromOtherMonthlyRevenue],
             );
         }
         if (this.model.otherAnnualRevenue) {
-            rows.push(['CA annuel autre', 'CA', this.model.otherAnnualRevenue],
+            rows.push(['CA annuel autre', 'CA total', this.model.otherAnnualRevenue],
             );
         }
         if (this.model.grossDividends) {
@@ -70,11 +70,11 @@ export class GraphSankeyComponent implements OnChanges {
             data.addRows(rows);
 
             let options = {
-                height: 500,
+                height: 600,
                 sankey: {
-                    iterations: 32,
+                    iterations: 64,
                     node: {
-                        nodePadding: 20,
+                        nodePadding: 15,
                         width: 15
                     },
                     link: {

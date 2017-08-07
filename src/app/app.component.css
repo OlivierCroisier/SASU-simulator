@@ -1,8 +1,21 @@
 .banner {
-    height: 12em;
+    min-height: 16em;
 }
 
 .banner .header {
     font-weight: normal;
-    margin-top: 2em;
+    margin-top: 1em;
+}
+
+.card .content {
+    padding-top: 1.5em;
+}
+
+.amount {
+    font-family: monospace;
+    float: right;
+}
+
+.bold {
+    font-weight: bold;
 }

@@ -1,10 +1,8 @@
 <div class="banner ui blue inverted vertical segment">
-    <div class="ui container">
-        <h1 class="ui inverted header">
-            <i class="barcode icon"></i>
-            Freelance simulator
-        </h1>
-    </div>
+    <h1 class="ui center aligned icon header">
+        <i class="laptop icon"></i>
+        Freelance en SASU
+    </h1>
 </div>
 
 <div class="ui vertical container segment">
@@ -12,12 +10,15 @@
     <form class="ui form" [formGroup]="simulatorForm" novalidate>
         <div class="ui three stackable cards">
 
-            <div class="card">
-                <div class="ui large attached top blue label">Recettes</div>
+            <div class="blue colored card">
                 <div class="content">
+                    <div class="ui large blue top attached label">Chiffre d'affaires</div>
                     <div class="field">
-                        <label>TJM</label>
-                        <input type="number" min="0" step="10" formControlName="dailyRevenue"/>
+                        <label>Journalier (TJM)</label>
+                        <div class="ui icon input">
+                            <input type="number" min="0" step="10" formControlName="dailyRevenue"/>
+                            <i class="euro icon"></i>
+                        </div>
                     </div>
                     <div class="field">
                         <label>Jours / mois</label>
@@ -25,43 +26,64 @@
                     </div>
                     <div class="field">
                         <label>Autre mensuel</label>
-                        <input type="number" min="0" step="100" formControlName="otherMonthlyRevenue">
+                        <div class="ui icon input">
+                            <input type="number" min="0" step="100" formControlName="otherMonthlyRevenue">
+                            <i class="euro icon"></i>
+                        </div>
                     </div>
                     <div class="field">
                         <label>Autre annuel</label>
-                        <input type="number" min="0" step="100" formControlName="otherAnnualRevenue">
+                        <div class="ui icon input">
+                            <input type="number" min="0" step="100" formControlName="otherAnnualRevenue">
+                            <i class="euro icon"></i>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="card">
-                <div class="ui large attached top blue label">Dépenses</div>
+            <div class="blue colored card">
                 <div class="content">
+                    <div class="ui large blue top attached label">Dépenses</div>
                     <div class="field">
                         <label>Frais mensuels</label>
-                        <input type="number" min="0" step="10" formControlName="monthlyFees"/>
+                        <div class="ui icon input">
+                            <input type="number" min="0" step="10" formControlName="monthlyFees"/>
+                            <i class="euro icon"></i>
+                        </div>
                     </div>
                     <div class="field">
                         <label>Frais annuels</label>
-                        <input type="number" min="0" step="100" formControlName="annualFees"/>
+                        <div class="ui icon input">
+                            <input type="number" min="0" step="100" formControlName="annualFees"/>
+                            <i class="euro icon"></i>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="card">
-                <div class="ui large attached top blue label">Rémunération</div>
+            <div class="blue colored card">
                 <div class="content">
+                    <div class="ui large blue top attached label">Rémunération</div>
                     <div class="field">
-                        <label>Salaire mensuel</label>
-                        <input type="number" min="0" step="100" formControlName="monthlyGrossSalary"/>
+                        <label>Salaire mensuel brut</label>
+                        <div class="ui icon input">
+                            <input type="number" min="0" step="100" formControlName="monthlyGrossSalary"/>
+                            <i class="euro icon"></i>
+                        </div>
                     </div>
                     <div class="field">
                         <label>Prime annuelle</label>
-                        <input type="number" min="0" step="100" formControlName="annualBonus"/>
+                        <div class="ui icon input">
+                            <input type="number" min="0" step="100" formControlName="annualBonus"/>
+                            <i class="euro icon"></i>
+                        </div>
                     </div>
                     <div class="field">
-                        <label>Dividendes (%)</label>
-                        <input type="number" min="0" max="100" step="1" formControlName="dividendsPercentage"/>
+                        <label>Dividendes pris</label>
+                        <div class="ui icon input">
+                            <input type="number" min="0" max="100" step="1" formControlName="dividendsPercentage"/>
+                            <i class="percent icon"></i>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -72,57 +94,95 @@
 
 <div class="ui vertical container segment">
     <div class="ui three statistics">
-        <div class="grey statistic">
+        <div class="blue statistic">
             <div class="value">{{model.totalAnnualRevenue | number}} €</div>
             <div class="label">Chiffre d'affaires</div>
         </div>
-        <div class="grey statistic">
-            <div class="value">{{model.totalAnnualFees | number}} €</div>
-            <div class="label">Dépenses</div>
-        </div>
         <div class="green statistic">
             <div class="value">{{model.totalFreelanceShare | number}} €</div>
-            <div class="label">Revenus nets</div>
+            <div class="label">Revenus nets freelance</div>
+        </div>
+        <div class="red statistic">
+            <div class="value">{{model.totalStateShare | number}} €</div>
+            <div class="label">Taxes et impôts</div>
         </div>
     </div>
 </div>
 
 <div class="ui container">
-    <div class="ui three column stackable grid">
-        <div class="column">
-            Jours travaillés annuellement : {{model.daysPerMonth * 12}}<br/>
-            Chiffre d'affaires brut : {{model.totalAnnualRevenue}} €<br/>
+
+    <div class="ui styled fluid accordion">
+        <div class="title">
+            <i class="dropdown icon"></i>
+            Détails
         </div>
-        <div class="column">
-            Dépenses brutes : {{model.totalAnnualFees}} €<br/>
-        </div>
-        <div class="column">
-            Salaire brut annuel : {{model.totalAnnualGrossSalary}} €<br/>
-            Cotisations patronales (42%) : {{model.employerSalaryTax}} €<br/>
-            Cotisations salariales (22%) : {{model.employeeSalaryTax}} €<br/>
-            Salaire net annuel : {{model.annualNetSalary}} €
-        </div>
-        <div class="column">
-            Bénéfice brut : {{model.grossProfit}} €<br/>
-            Impôt sur les Sociétés (IS) : {{model.profitTax}} €<br/>
-            Bénéfice net : {{model.netProfit}} €<br/>
-            <br/>
-            Investissement : {{model.investment}} € <br/>
-            Dividendes bruts : {{model.grossDividends}} € <br/>
-            Prélévements sociaux sur les dividendes (15.5%): {{model.dividendsTax}} € <br/>
-            Dividendes nets : {{model.netDividends}} € <br/>
-            <br/>
-            CA : {{model.totalAnnualRevenue}} €<br/>
-            Dépenses : {{model.totalAnnualFees}} €<br/>
-            Revenu freelance (net avant IRPP): {{model.totalFreelanceShare}} €<br/>
-            Revenu société : {{model.totalCompanyShare}} €<br/>
-            Revenu Etat : {{model.totalStateShare}} €<br/>
+        <div class="content">
+            <div class="ui four column stackable doubling grid">
+                <div class="column">
+                    <h3 class="header">Chiffre d'affaires</h3>
+                    Jours travaillés / an <span class="amount">{{model.daysPerMonth * 12}}</span>
+                    <br/><br/>
+                    CA via TJM <span class="amount">{{model.annualRevenueFromRegularMonthlyRevenue | number}} €</span><br/>
+                    CA mensuel <span class="amount">{{model.annualRevenueFromOtherMonthlyRevenue | number}} €</span><br/>
+                    CA annuel <span class="amount">{{model.otherAnnualRevenue | number}} €</span><br/>
+                    <hr/>
+                    Total CA <span class="bold amount">{{model.totalAnnualRevenue | number}} €</span>
+                </div>
+                <div class="column">
+                    <h3 class="header">Dépenses</h3>
+                    Frais mensuels <span class="amount">{{model.annualFeesFromMonthlyFees | number}} €</span><br/>
+                    Frais annuels <span class="amount">{{model.annualFees | number}} €</span>
+                    <hr/>
+                    Total frais <span class="amount">{{model.totalAnnualFees | number}} €</span>
+                    <br/><br/>
+                    Salaire annuel brut <span class="amount">{{model.annualGrossSalary | number}} €</span><br/>
+                    Prime annuelle brute <span class="amount">{{model.annualGrossBonus | number}} €</span>
+                    <hr/>
+                    Total brut <span class="amount">{{model.totalAnnualGrossSalary | number}} €</span><br/>
+                    Cotis. patronales (42%) <span class="amount">{{model.employerSalaryTax | number}} €</span>
+                    <hr/>
+                    Total super-brut <span class="amount">{{model.annualSuperGrossSalary | number}} €</span>
+                    <br/><br/>
+                    Total dépenses <span class="bold amount">{{model.totalAnnualSpendings | number}} €</span>
+                </div>
+                <div class="column">
+                    <h3 class="header">Bénéfices</h3>
+                    Total CA <span class="amount">{{model.totalAnnualRevenue | number}} €</span><br/>
+                    Total Dépenses <span class="amount">{{model.totalAnnualSpendings | number}} €</span>
+                    <hr/>
+                    Bénéfice brut <span class="amount">{{model.grossProfit | number}} €</span><br/>
+                    Impôt sur les Sociétés (IS) <span class="amount">{{model.profitTax | number}} €</span>
+                    <hr/>
+                    Bénéfice net <span class="bold amount">{{model.netProfit | number}} €</span>
+                </div>
+                <div class="column">
+                    <h3 class="header">Revenus</h3>
+                    Salaire brut <span class="amount">{{model.totalAnnualGrossSalary | number}} €</span><br/>
+                    Cotis. salariales (22%) : <span class="amount">{{model.employeeSalaryTax | number}} €</span>
+                    <hr/>
+                    Salaire net <span class="amount">{{model.annualNetSalary | number}} €</span>
+                    <br/><br/>
+                    Bénéfice net <span class="amount">{{model.netProfit | number}} €</span><br/>
+                    Dividendes versés ({{model.dividendsPercentage}}%) : <span class="amount">{{model.grossDividends | number}} €</span> <br/>
+                    Prélévements sociaux (15.5%): <span class="amount">{{model.dividendsTax | number}} €</span>
+                    <hr/>
+                    Dividendes nets <span class="amount">{{model.netDividends | number}} €</span> <br/>
+                    <br/><br/>
+                    Total revenus <span class="bold amount">{{model.totalFreelanceShare | number}} €</span><br/>
+                </div>
+            </div>
         </div>
     </div>
+
 </div>
 
-<div class="ui container">
+<div class="ui vertical container segment">
     <app-graph-sankey *ngIf="model" [model]="model" class="ui fluid container"></app-graph-sankey>
 </div>
 
-
+<div class="ui container segment">
+    <h2>Notes</h2>
+    <p>
+        Hello world
+    </p>
+</div>
