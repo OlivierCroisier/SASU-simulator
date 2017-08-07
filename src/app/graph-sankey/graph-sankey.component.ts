@@ -19,48 +19,31 @@ export class GraphSankeyComponent implements OnChanges {
 
     ngOnChanges(changes: SimpleChanges): void {
         let rows = [
+            ['CA journalier', 'CA total', this.model.annualRevenueFromRegularMonthlyRevenue],
+            ['CA mensuel  autre', 'CA total', this.model.annualRevenueFromOtherMonthlyRevenue],
+            ['CA annuel autre', 'CA total', this.model.otherAnnualRevenue],
             ['CA total', 'Dépenses', this.model.totalAnnualSpendings],
-            ['Dépenses', 'Achats', this.model.totalAnnualFees],
-            ['Dépenses', 'Salaire super-brut', this.model.annualSuperGrossSalary],
-            ['Salaire super-brut', 'Charges patronales', this.model.employerSalaryTax],
-            ['Charges patronales', 'Etat', this.model.employerSalaryTax],
-            ['Salaire super-brut', 'Salaire brut', this.model.totalAnnualGrossSalary],
-            ['Salaire brut', 'Charges salariales', this.model.employeeSalaryTax],
-            ['Charges salariales', 'Etat', this.model.employeeSalaryTax],
-            ['Salaire brut', 'Salaire net', this.model.annualNetSalary],
-            ['Salaire net', 'Freelance', this.model.annualNetSalary],
-            ['CA total', 'Bénéfices bruts', this.model.grossProfit],
-            ['Bénéfices bruts', 'IS', this.model.profitTax],
+                ['Dépenses', 'Achats', this.model.totalAnnualFees],
+                ['Dépenses', 'Salaire super-brut', this.model.annualSuperGrossSalary],
+                    ['Salaire super-brut', 'Charges patronales', this.model.employerSalaryTax],
+                        ['Charges patronales', 'Etat', this.model.employerSalaryTax],
+                    ['Salaire super-brut', 'Salaire brut', this.model.totalAnnualGrossSalary],
+                        ['Salaire brut', 'Charges salariales', this.model.employeeSalaryTax],
+                            ['Charges salariales', 'Etat', this.model.employeeSalaryTax],
+                        ['Salaire brut', 'Salaire net', this.model.annualNetSalary],
+                            ['Salaire net', 'Freelance', this.model.annualNetSalary],
             ['IS', 'Etat', this.model.profitTax],
-            ['Bénéfices bruts', 'Bénéfices nets', this.model.netProfit],
-            ['Bénéfices nets', 'Dividendes bruts', this.model.grossDividends]
-        ];
-        if (this.model.annualRevenueFromRegularMonthlyRevenue) {
-            rows.push(['CA journalier', 'CA total', this.model.annualRevenueFromRegularMonthlyRevenue]);
-        }
-        if (this.model.annualRevenueFromOtherMonthlyRevenue) {
-            rows.push(['CA mensuel  autre', 'CA total', this.model.annualRevenueFromOtherMonthlyRevenue],
-            );
-        }
-        if (this.model.otherAnnualRevenue) {
-            rows.push(['CA annuel autre', 'CA total', this.model.otherAnnualRevenue],
-            );
-        }
-        if (this.model.grossDividends) {
-            rows.push(
-                ['Dividendes bruts', 'Dividendes nets', this.model.netDividends],
-                ['Dividendes nets', 'Freelance', this.model.netDividends],
-                ['Dividendes bruts', 'Cotisations sociales', this.model.dividendsTax],
-                ['Cotisations sociales', 'Etat', this.model.dividendsTax]
-            );
-        }
-        if (this.model.investment) {
-            rows.push(
-                ['Bénéfices nets', 'Investissement', this.model.investment],
-                ['Investissement', 'Société', this.model.investment]
-            );
-        }
-
+                ['CA total', 'Bénéfices bruts', this.model.grossProfit],
+                    ['Bénéfices bruts', 'IS', this.model.profitTax],
+                    ['Bénéfices bruts', 'Bénéfices nets', this.model.netProfit],
+                        ['Bénéfices nets', 'Investissement', this.model.investment],
+                            ['Investissement', 'Société', this.model.investment],
+                        ['Bénéfices nets', 'Dividendes bruts', this.model.grossDividends],
+                            ['Dividendes bruts', 'Dividendes nets', this.model.netDividends],
+                                ['Dividendes nets', 'Freelance', this.model.netDividends],
+                            ['Dividendes bruts', 'Cotisations sociales', this.model.dividendsTax],
+                                ['Cotisations sociales', 'Etat', this.model.dividendsTax]
+        ].filter(r => r[2]);
         google.charts.load('current', {'packages': ['sankey']});
         google.charts.setOnLoadCallback(() => {
             let data = new google.visualization.DataTable();
@@ -78,7 +61,7 @@ export class GraphSankeyComponent implements OnChanges {
                         width: 15
                     },
                     link: {
-                        colorMode: 'target'
+                        colorMode: 'gradient'
                     }
                 },
             };

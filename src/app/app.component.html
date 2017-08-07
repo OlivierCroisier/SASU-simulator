@@ -103,7 +103,7 @@
         </div>
         <div class="green statistic">
             <div class="value">{{model.totalFreelanceShare | number}} €</div>
-            <div class="label">Revenus nets freelance</div>
+            <div class="label">Revenus nets freelance<br/>(avant IRPP)</div>
         </div>
         <div class="red statistic">
             <div class="value">{{model.totalStateShare | number}} €</div>
@@ -169,7 +169,7 @@
                     Dividendes versés ({{model.dividendsPercentage}}%) : <span class="amount">{{model.grossDividends | number}} €</span> <br/>
                     Prélévements sociaux (15.5%): <span class="amount">{{model.dividendsTax | number}} €</span>
                     <hr/>
-                    Dividendes nets <span class="amount">{{model.netDividends | number}} €</span> <br/>
+                    Dividendes nets <span class="amount">{{model.netDividends | number}} €</span>
                     <br/><br/>
                     Total revenus <span class="bold amount">{{model.totalFreelanceShare | number}} €</span><br/>
                 </div>
@@ -185,10 +185,16 @@
 
 <div class="ui container segment">
     <h2>Notes</h2>
-    <p>
-        Cette simulation est légèrement simplifiée.<br/>
-        Elle ne prend pas en compte, par exemple, la réserve légale (portion des bénéfices obligatoirement réaffectée à la société).<br/>
-        Toutefois, elle permet d'appréhender la répartition des grandes masses, et le flux monétaire entre les sources de chiffre d'affaires d'un côté, et de l'autre, le freelance,
-        sa société, ses sous-traitants et l'Etat.
-    </p>
+    <ul>
+        <li>
+            Cette simulation est légèrement simplifiée.<br/>
+            Elle ne prend pas en compte, par exemple, la réserve légale (portion des bénéfices obligatoirement réaffectée à la société).<br/>
+            Toutefois, elle permet d'appréhender la répartition des grandes masses, et le flux monétaire entre les sources de chiffre d'affaires d'un côté, et de l'autre, le freelance,
+            sa société, ses sous-traitants et l'Etat.
+        </li>
+        <li>
+            Le "Revenu net freelance" s'entend <i>avant impôt sur le revenu</i> (IRPP).<br/>
+            Les salaires sont imposés intégralement à l'IRPP ; les dividendes, ayant déjà été lourdement taxés, bénéficient d'un abattement de 40%.
+        </li>
+    </ul>
 </div>

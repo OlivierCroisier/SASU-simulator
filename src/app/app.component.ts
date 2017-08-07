@@ -79,12 +79,12 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
 
         // Profit
         newModel.grossProfit = newModel.totalAnnualRevenue - newModel.totalAnnualSpendings;
-        newModel.profitTax = Math.round(Math.min(newModel.grossProfit, 38000) * 0.15) + Math.round(Math.max(newModel.grossProfit - 38000, 0) * 0.333);
+        newModel.profitTax = Math.max(0, Math.round(Math.min(newModel.grossProfit, 38000) * 0.15) + Math.round(Math.max(newModel.grossProfit - 38000, 0) * 0.333));
         newModel.netProfit = newModel.grossProfit - newModel.profitTax;
 
         // Dividends
         newModel.dividendsPercentage = params.dividendsPercentage;
-        newModel.grossDividends = Math.round(newModel.netProfit * newModel.dividendsPercentage / 100);
+        newModel.grossDividends = Math.max(0, Math.round(newModel.netProfit * newModel.dividendsPercentage / 100));
         newModel.dividendsTax = Math.round(newModel.grossDividends * 0.155);
         newModel.netDividends = newModel.grossDividends - newModel.dividendsTax;
         newModel.investment = newModel.netProfit - newModel.grossDividends;
