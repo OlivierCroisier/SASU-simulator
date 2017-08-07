@@ -78,7 +78,7 @@ export class GraphSankeyComponent implements OnChanges {
                         width: 15
                     },
                     link: {
-                        colorMode: 'source'
+                        colorMode: 'target'
                     }
                 },
             };

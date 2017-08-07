@@ -32,7 +32,7 @@ export class AppComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        this.subscription = this.simulatorForm.valueChanges.debounceTime(200).subscribe(() => this.simulate());
+        this.subscription = this.simulatorForm.valueChanges.debounceTime(50).subscribe(() => this.simulate());
         this.simulate();
     }
     ngOnDestroy() {

@@ -1,77 +1,108 @@
+<div class="banner ui blue inverted vertical segment">
+    <div class="ui container">
+        <h1 class="ui inverted header">
+            <i class="barcode icon"></i>
+            Freelance simulator
+        </h1>
+    </div>
+</div>
+
+<div class="ui vertical container segment">
+
+    <form class="ui form" [formGroup]="simulatorForm" novalidate>
+        <div class="ui three stackable cards">
+
+            <div class="card">
+                <div class="ui large attached top blue label">Recettes</div>
+                <div class="content">
+                    <div class="field">
+                        <label>TJM</label>
+                        <input type="number" min="0" step="10" formControlName="dailyRevenue"/>
+                    </div>
+                    <div class="field">
+                        <label>Jours / mois</label>
+                        <input type="number" min="0" step="1" formControlName="daysPerMonth">
+                    </div>
+                    <div class="field">
+                        <label>Autre mensuel</label>
+                        <input type="number" min="0" step="100" formControlName="otherMonthlyRevenue">
+                    </div>
+                    <div class="field">
+                        <label>Autre annuel</label>
+                        <input type="number" min="0" step="100" formControlName="otherAnnualRevenue">
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="ui large attached top blue label">Dépenses</div>
+                <div class="content">
+                    <div class="field">
+                        <label>Frais mensuels</label>
+                        <input type="number" min="0" step="10" formControlName="monthlyFees"/>
+                    </div>
+                    <div class="field">
+                        <label>Frais annuels</label>
+                        <input type="number" min="0" step="100" formControlName="annualFees"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="ui large attached top blue label">Rémunération</div>
+                <div class="content">
+                    <div class="field">
+                        <label>Salaire mensuel</label>
+                        <input type="number" min="0" step="100" formControlName="monthlyGrossSalary"/>
+                    </div>
+                    <div class="field">
+                        <label>Prime annuelle</label>
+                        <input type="number" min="0" step="100" formControlName="annualBonus"/>
+                    </div>
+                    <div class="field">
+                        <label>Dividendes (%)</label>
+                        <input type="number" min="0" max="100" step="1" formControlName="dividendsPercentage"/>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+
+<div class="ui vertical container segment">
+    <div class="ui three statistics">
+        <div class="grey statistic">
+            <div class="value">{{model.totalAnnualRevenue | number}} €</div>
+            <div class="label">Chiffre d'affaires</div>
+        </div>
+        <div class="grey statistic">
+            <div class="value">{{model.totalAnnualFees | number}} €</div>
+            <div class="label">Dépenses</div>
+        </div>
+        <div class="green statistic">
+            <div class="value">{{model.totalFreelanceShare | number}} €</div>
+            <div class="label">Revenus nets</div>
+        </div>
+    </div>
+</div>
+
 <div class="ui container">
-
-    <h1 class="ui header">Freelance simulator</h1>
-
-    <form class="ui form" novalidate
-          [formGroup]="simulatorForm">
-
-        <h3 class="ui dividing header">Chiffre d'affaire</h3>
-        <div class="fields">
-            <div class="field">
-                <label>TJM</label>
-                <input type="number" min="0" step="10" formControlName="dailyRevenue"/>
-            </div>
-            <div class="field">
-                <label>Jours / mois</label>
-                <input type="number" min="0" step="1" formControlName="daysPerMonth">
-            </div>
-        </div>
-        <div class="fields">
-            <div class="field">
-                <label>Autre CA mensuel</label>
-                <input type="number" min="0" step="100" formControlName="otherMonthlyRevenue">
-            </div>
-            <div class="field">
-                <label>Autre CA annuel</label>
-                <input type="number" min="0" step="100" formControlName="otherAnnualRevenue">
-            </div>
-        </div>
-        <div>
+    <div class="ui three column stackable grid">
+        <div class="column">
             Jours travaillés annuellement : {{model.daysPerMonth * 12}}<br/>
             Chiffre d'affaires brut : {{model.totalAnnualRevenue}} €<br/>
         </div>
-
-        <h3 class="ui dividing header">Dépenses</h3>
-        <div class="fields">
-            <div class="field">
-                <label>Frais mensuels</label>
-                <input type="number" min="0" step="10" formControlName="monthlyFees"/>
-            </div>
-            <div class="field">
-                <label>Frais annuels</label>
-                <input type="number" min="0" step="100" formControlName="annualFees"/>
-            </div>
-        </div>
-        <div>
+        <div class="column">
             Dépenses brutes : {{model.totalAnnualFees}} €<br/>
         </div>
-
-        <h3 class="ui dividing header">Rémunération</h3>
-        <div class="fields">
-            <div class="field">
-                <label>Salaire brut mensuel</label>
-                <input type="number" min="0" step="100" formControlName="monthlyGrossSalary"/>
-            </div>
-            <div class="field">
-                <label>Primes annuelles</label>
-                <input type="number" min="0" step="100" formControlName="annualBonus"/>
-            </div>
-        </div>
-        <div>
+        <div class="column">
             Salaire brut annuel : {{model.totalAnnualGrossSalary}} €<br/>
             Cotisations patronales (42%) : {{model.employerSalaryTax}} €<br/>
             Cotisations salariales (22%) : {{model.employeeSalaryTax}} €<br/>
             Salaire net annuel : {{model.annualNetSalary}} €
         </div>
-
-        <h3 class="ui dividing header">Bénéfices</h3>
-        <div class="fields">
-            <div class="field">
-                <label>Dividendes (%)</label>
-                <input type="number" min="0" max="100" step="1" formControlName="dividendsPercentage"/>
-            </div>
-        </div>
-        <div>
+        <div class="column">
             Bénéfice brut : {{model.grossProfit}} €<br/>
             Impôt sur les Sociétés (IS) : {{model.profitTax}} €<br/>
             Bénéfice net : {{model.netProfit}} €<br/>
@@ -80,22 +111,18 @@
             Dividendes bruts : {{model.grossDividends}} € <br/>
             Prélévements sociaux sur les dividendes (15.5%): {{model.dividendsTax}} € <br/>
             Dividendes nets : {{model.netDividends}} € <br/>
-        </div>
-
-        <h3 class="ui dividing header">Récapitulatif</h3>
-        <div>
+            <br/>
             CA : {{model.totalAnnualRevenue}} €<br/>
             Dépenses : {{model.totalAnnualFees}} €<br/>
             Revenu freelance (net avant IRPP): {{model.totalFreelanceShare}} €<br/>
             Revenu société : {{model.totalCompanyShare}} €<br/>
             Revenu Etat : {{model.totalStateShare}} €<br/>
         </div>
-
-    </form>
-
-    <app-graph-sankey *ngIf="model" [model]="model" class="ui fluid container"></app-graph-sankey>
-
-    <pre>{{model|json}}</pre>
-
+    </div>
 </div>
+
+<div class="ui container">
+    <app-graph-sankey *ngIf="model" [model]="model" class="ui fluid container"></app-graph-sankey>
+</div>
+
 
