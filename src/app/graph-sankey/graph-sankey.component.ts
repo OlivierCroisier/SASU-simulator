@@ -30,8 +30,10 @@ export class GraphSankeyComponent implements OnChanges {
                     ['Salaire super-brut', 'Salaire brut', this.model.totalAnnualGrossSalary],
                         ['Salaire brut', 'Charges salariales', this.model.employeeSalaryTax],
                             ['Charges salariales', 'Etat', this.model.employeeSalaryTax],
-                        ['Salaire brut', 'Salaire net', this.model.annualNetSalary],
+                        ['Salaire brut', 'Salaire net', this.model.annualNetSalary+this.model.salaryRevenueTax],
                             ['Salaire net', 'Freelance', this.model.annualNetSalary],
+                            ['Salaire net', 'IR', this.model.salaryRevenueTax],
+                            ['IR', 'Etat', this.model.salaryRevenueTax],
             ['IS', 'Etat', this.model.profitTax],
                 ['CA total', 'Bénéfices bruts', this.model.grossProfit],
                     ['Bénéfices bruts', 'IS', this.model.profitTax],
@@ -41,8 +43,8 @@ export class GraphSankeyComponent implements OnChanges {
                         ['Bénéfices nets', 'Dividendes bruts', this.model.grossDividends],
                             ['Dividendes bruts', 'Dividendes nets', this.model.netDividends],
                                 ['Dividendes nets', 'Freelance', this.model.netDividends],
-                            ['Dividendes bruts', 'Cotisations sociales', this.model.dividendsTax],
-                                ['Cotisations sociales', 'Etat', this.model.dividendsTax]
+                            ['Dividendes bruts', 'Flat tax', this.model.dividendsTax],
+                                ['Flat tax', 'Etat', this.model.dividendsTax]
         ].filter(r => r[2]);
         google.charts.load('current', {'packages': ['sankey']});
         google.charts.setOnLoadCallback(() => {

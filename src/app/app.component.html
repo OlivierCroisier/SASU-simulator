@@ -91,6 +91,25 @@
                 </div>
             </div>
 
+            <div class="blue colored card">
+                <div class="content">
+                    <div class="ui large blue top attached label">Impôts sur le revenu</div>
+                    <div class="field">
+                        <label>Revenu fiscal (hors freelance)</label>
+                        <div class="ui icon input">
+                            <input type="number" min="0" step="100" formControlName="familyReferenceRevenue"/>
+                            <i class="euro icon"></i>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>Nombre de parts</label>
+                        <div class="ui icon input">
+                            <input type="number" min="0" step="100" formControlName="familyQuotient"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </form>
 </div>
@@ -103,7 +122,7 @@
         </div>
         <div class="green statistic">
             <div class="value">{{model.totalFreelanceShare | number}} €</div>
-            <div class="label">Revenus nets freelance<br/>(avant IRPP)</div>
+            <div class="label">Revenus nets freelance<br/>(après IR)</div>
         </div>
         <div class="red statistic">
             <div class="value">{{model.totalStateShare | number}} €</div>
@@ -154,20 +173,21 @@
                     Total Dépenses <span class="amount">{{model.totalAnnualSpendings | number}} €</span>
                     <hr/>
                     Bénéfice brut <span class="amount">{{model.grossProfit | number}} €</span><br/>
-                    Impôt sur les Sociétés (IS) <span class="amount">{{model.profitTax | number}} €</span>
+                    Impôt sur les Sociétés (IS 2018) <span class="amount">{{model.profitTax | number}} €</span>
                     <hr/>
                     Bénéfice net <span class="bold amount">{{model.netProfit | number}} €</span>
                 </div>
                 <div class="column">
                     <h3 class="header">Revenus</h3>
                     Salaire brut <span class="amount">{{model.totalAnnualGrossSalary | number}} €</span><br/>
-                    Cotis. salariales (22%) : <span class="amount">{{model.employeeSalaryTax | number}} €</span>
+                    Cotis. salariales (22%) : <span class="amount">{{model.employeeSalaryTax | number}} €</span><br/>
+                    Impôts sur Revenu : <span class="amount">{{model.salaryRevenueTax | number}} €</span>
                     <hr/>
                     Salaire net <span class="amount">{{model.annualNetSalary | number}} €</span>
                     <br/><br/>
                     Bénéfice net <span class="amount">{{model.netProfit | number}} €</span><br/>
                     Dividendes versés ({{model.dividendsPercentage}}%) : <span class="amount">{{model.grossDividends | number}} €</span> <br/>
-                    Prélévements sociaux (15.5%): <span class="amount">{{model.dividendsTax | number}} €</span>
+                    Flat tax (30%) <span class="amount">{{model.dividendsTax | number}} €</span>
                     <hr/>
                     Dividendes nets <span class="amount">{{model.netDividends | number}} €</span>
                     <br/><br/>
@@ -193,8 +213,10 @@
             sa société, ses sous-traitants et l'Etat.
         </li>
         <li>
-            Le "Revenu net freelance" s'entend <i>avant impôt sur le revenu</i> (IRPP).<br/>
-            Les salaires sont imposés intégralement à l'IRPP ; les dividendes, ayant déjà été lourdement taxés, bénéficient d'un abattement de 40%.
+            Le "Revenu net freelance" s'entend <i><u>après</u> impôt sur le revenu</i> (IRPP).<br/>
+        </li>
+        <li>
+            Le calcul de l'IR correspond à la part d'IR à payer en plus du fait de l'activité de l'entreprise. Il ne prend pas en compte l'IR total à payer pour une famille.
         </li>
     </ul>
 </div>

@@ -24,6 +24,7 @@ export class Model {
     employeeSalaryTax: number = 0;
     annualSuperGrossSalary: number = 0;
     annualNetSalary: number = 0;
+    salaryRevenueTax: number = 0;
 
     // Spendings
     totalAnnualSpendings: number = 0;
