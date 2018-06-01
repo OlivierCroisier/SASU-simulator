@@ -27,7 +27,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
             annualFees: 2000,
             monthlyGrossSalary: 1000,
             annualBonus: 0,
-            dividendsPercentage: 100,
+            dividendsPercentage: 80,
             familyReferenceRevenue: 45000,
             familyQuotient: 2
         });
